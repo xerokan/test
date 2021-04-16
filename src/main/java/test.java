@@ -21,11 +21,17 @@ public class test {
             String[] info = lines.get(i+1).split(" ");
 
             Miliarder mil = new Miliarder(info[0], Long.valueOf(info[2]));
-            City ct = new City(mil,info[1]);
-            mil.setCity(ct);
-            cityMap.put(ct.name, ct);
+            if (cityMap.get(info[1])!= null){
+                cityMap.get(info[1]).addMil(mil);
+                mil.setCity(cityMap.get(info[1]));
+            }
+            else {
+                City ct = new City(info[1]);
+                ct.addMil(mil);
+                mil.setCity(ct);
+                cityMap.put(ct.name, ct);
+            }
             milMap.put(mil.name, mil);
-
         }
 
         for (Map.Entry<String, City> entry: cityMap.entrySet()) {

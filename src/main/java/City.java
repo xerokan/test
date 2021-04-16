@@ -5,13 +5,13 @@ public class City{
     public Set<Miliarder> sum = new HashSet<>();
     public Long summ;
 
-    public City(Miliarder mil, String nam){
-        this.sum.add(mil);
-        this.name = nam;
-    }
 
     public City( String nam){
         this.name = nam;
+    }
+
+    public void addMil(Miliarder mil){
+        this.sum.add(mil);
     }
 
     public long cash(){
