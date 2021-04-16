@@ -14,12 +14,14 @@ public class City{
         this.name = nam;
     }
 
-    public long summ(){
+    public long cash(){
+        Long s = Long.valueOf(0);
         Iterator<Miliarder> iter =  this.sum.iterator();
         while (iter.hasNext()) {
             Miliarder mil = iter.next();
-            this.summ += mil.money ;
+            s += mil.money ;
         }
+        this.summ = s;
         return this.summ;
     }
 }

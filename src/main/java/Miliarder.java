@@ -11,7 +11,7 @@ public class Miliarder<T extends City> {
         this.money = money;
     }
 
-    public void getCity(City place){
+    public void setCity(City place){
         this.place = place;
     }
 }
