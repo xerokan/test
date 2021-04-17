@@ -14,4 +14,10 @@ public class Miliarder<T extends City> {
     public void setCity(City place){
         this.place = place;
     }
+
+    public void moveTO(City ct){
+        this.place.removeMil(this);
+        ct.addMil(this);
+        this.place = ct;
+    }
 }

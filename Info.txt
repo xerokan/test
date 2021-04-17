@@ -14,4 +14,3 @@ Khodorkovsky Chita 1000000000
 20 Berezovsky Tbilisi
 21 Potanin StPetersburg
 22 Berezovsky London
-

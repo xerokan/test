@@ -2,6 +2,19 @@ import java.io.*;
 import java.util.*;
 
 public class test {
+
+    public static void findMaxCash(Map<String, City> map) {
+        long max = 0;
+        String key = null;
+        for (Map.Entry<String, City> entry: map.entrySet()) {
+           if (max < entry.getValue().cash()){
+               key = entry.getKey();
+               max = entry.getValue().cash();
+           }
+        }
+        map.get(key).count += 1;
+    }
+
     public static void main(String[] args) throws FileNotFoundException {
         boolean oj = System.getProperty("ONLINE_JUDGE") != null;
         Reader reader = oj ? new InputStreamReader(System.in) : new FileReader("Info.txt");
@@ -14,7 +27,6 @@ public class test {
         }
         Map<String, City> cityMap = new HashMap<>();
         Map<String, Miliarder> milMap = new HashMap<>();
-        System.out.println(lines.get(0));
 
 //        Byte str = Byte.parseByte(lines.get(0));
         for(int i = 0; i< 5; i++){
@@ -34,10 +46,24 @@ public class test {
             milMap.put(mil.name, mil);
         }
 
-        for (Map.Entry<String, City> entry: cityMap.entrySet()) {
-            System.out.println(entry.getValue().cash());
-        }
+        findMaxCash(cityMap);
 
+        String[] nums = lines.get(5+1).split(" ");
+        int days = Integer.valueOf(nums[0]);
+        for (int i = 1; i<days;i++){
+            for (int j = 2; j<lines.size()-5; j++){
+
+              String[] str = lines.get(5+j).split(" ");
+              if (Integer.valueOf(str[0]) == i && cityMap.containsKey(str[2])) {
+                  milMap.get(str[1]).moveTO(cityMap.get(str[2]));
+              } else if (Integer.valueOf(str[0]) == i && !(cityMap.containsKey(str[2]))){
+                  City ct = new City(str[2]);
+                  cityMap.put(ct.name, ct);
+                  milMap.get(str[1]).moveTO(cityMap.get(str[2]));
+              }
+            }
+            findMaxCash(cityMap);
+        }
     }
 }
 
