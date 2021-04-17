@@ -1,0 +1,4 @@
+Anadyr 5
+London 14
+Moscow 5
+StPetersburg 1

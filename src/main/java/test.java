@@ -15,15 +15,16 @@ public class test {
         map.get(key).count += 1;
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
         boolean oj = System.getProperty("ONLINE_JUDGE") != null;
         Reader reader = oj ? new InputStreamReader(System.in) : new FileReader("Info.txt");
+        Writer writer = oj ? new OutputStreamWriter(System.out) : new FileWriter("output.txt");
         Scanner sc = new Scanner(reader);
+        PrintWriter out = new PrintWriter(writer);
         ArrayList<String> lines = new ArrayList<>();
         while (sc.hasNextLine()) {
             String s = sc.nextLine();
             lines.add(s);
-            System.out.println(lines);
         }
         Map<String, City> cityMap = new HashMap<>();
         Map<String, Miliarder> milMap = new HashMap<>();
@@ -63,6 +64,19 @@ public class test {
               }
             }
             findMaxCash(cityMap);
+        }
+        ArrayList<String> view = new ArrayList<>();
+        for (Map.Entry<String, City> entry : cityMap.entrySet()){
+            if (entry.getValue().count != 0 ){
+                view.add(entry.getKey() + " " + entry.getValue().count);
+            }
+        }
+        Collections.sort(view);
+        Iterator<String> iter =  view.iterator();
+        while (iter.hasNext()) {
+            out.write(iter.next());
+            writer.append('\n');
+            out.flush();
         }
     }
 }
