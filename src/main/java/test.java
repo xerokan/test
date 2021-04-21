@@ -65,6 +65,13 @@ public class test {
                max = entry.getValue().cash();
            }
         }
+        for (Map.Entry<String, City> entry: map.entrySet()) {
+            if ((map.get(key).summ == entry.getValue().cash())) {
+                if ((key != entry.getKey())) {
+                    return;
+                }
+            }
+        }
         map.get(key).count += 1;
     }
 
