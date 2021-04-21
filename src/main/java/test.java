@@ -3,6 +3,59 @@ import java.util.*;
 
 public class test {
 
+    static class City{
+        public String name;
+        public Set<Miliarder> sum = new HashSet<>();
+        public Long summ;
+        public int count;
+
+
+        public City( String nam){
+            this.name = nam;
+            this.count = 0;
+        }
+
+        public void addMil(Miliarder mil){
+            this.sum.add(mil);
+        }
+
+        public void removeMil(Miliarder mil){
+            this.sum.remove(mil);
+        }
+
+        public long cash(){
+            Long s = Long.valueOf(0);
+            Iterator<Miliarder> iter =  this.sum.iterator();
+            while (iter.hasNext()) {
+                Miliarder mil = iter.next();
+                s += mil.money ;
+            }
+            this.summ = s;
+            return this.summ;
+        }
+    }
+
+    static class Miliarder {
+        public String name;
+        public Long money;
+        public City place;
+
+        public Miliarder(String name, Long money){
+            this.name = name;
+            this.money = money;
+        }
+
+        public void setCity(City place){
+            this.place = place;
+        }
+
+        public void moveTO(City ct){
+            this.place.removeMil(this);
+            ct.addMil(this);
+            this.place = ct;
+        }
+    }
+
     public static void findMaxCash(Map<String, City> map) {
         long max = 0;
         String key = null;
@@ -30,7 +83,8 @@ public class test {
         Map<String, Miliarder> milMap = new HashMap<>();
 
 //        Byte str = Byte.parseByte(lines.get(0));
-        for(int i = 0; i< 5; i++){
+        int lines1 = 5;
+        for(int i = 0; i< lines1; i++){
             String[] info = lines.get(i+1).split(" ");
 
             Miliarder mil = new Miliarder(info[0], Long.valueOf(info[2]));
@@ -49,12 +103,12 @@ public class test {
 
         findMaxCash(cityMap);
 
-        String[] nums = lines.get(5+1).split(" ");
+        String[] nums = lines.get(lines1+1).split(" ");
         int days = Integer.valueOf(nums[0]);
         for (int i = 1; i<days;i++){
-            for (int j = 2; j<lines.size()-5; j++){
+            for (int j = 2; j<lines.size()-lines1; j++){
 
-              String[] str = lines.get(5+j).split(" ");
+              String[] str = lines.get(lines1+j).split(" ");
               if (Integer.valueOf(str[0]) == i && cityMap.containsKey(str[2])) {
                   milMap.get(str[1]).moveTO(cityMap.get(str[2]));
               } else if (Integer.valueOf(str[0]) == i && !(cityMap.containsKey(str[2]))){
