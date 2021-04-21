@@ -82,8 +82,8 @@ public class test {
         Map<String, City> cityMap = new HashMap<>();
         Map<String, Miliarder> milMap = new HashMap<>();
 
-//        Byte str = Byte.parseByte(lines.get(0));
-        int lines1 = 5;
+        int lines1 = Integer.parseInt(lines.get(0).replaceAll("[^\\x00-\\xFF]", ""));
+//        int lines1 = 5;
         for(int i = 0; i< lines1; i++){
             String[] info = lines.get(i+1).split(" ");
 
